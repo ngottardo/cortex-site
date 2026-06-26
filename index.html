@@ -85,16 +85,23 @@
   /* CASES with circus icons */
   .case-list { margin: 28px 0 0; }
   .case {
-    display: flex; gap: 18px; align-items: flex-start;
-    padding: 22px 0; border-top: 1px solid var(--line);
+    display: flex; gap: 13px; align-items: flex-start;
+    padding: 20px 0; border-top: 1px solid var(--line);
   }
   .case:first-child { border-top: none; }
-  .case-icon { flex: 0 0 auto; width: 40px; height: 40px; margin-top: 2px; }
-  .case-icon svg { width: 40px; height: 40px; display: block; }
-  .case-body { flex: 1; }
+  .case-icon { flex: 0 0 auto; width: 30px; height: 30px; margin-top: 3px; }
+  .case-icon svg { width: 30px; height: 30px; display: block; }
+  .case-body { flex: 1; min-width: 0; }
   .case-role { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--crimson); margin-bottom: 5px; }
-  .case-text { font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.45; color: #1A1816; }
+  .case-text { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.45; color: #1A1816; }
   .case-text .it { font-style: italic; color: var(--warm-gray); }
+
+  @media (min-width: 600px) {
+    .case { gap: 18px; padding: 22px 0; }
+    .case-icon { width: 40px; height: 40px; margin-top: 2px; }
+    .case-icon svg { width: 40px; height: 40px; }
+    .case-text { font-size: 19px; }
+  }
 
   /* SKEPTIC */
   .skeptic { background: var(--cream-deep); margin: 0 -28px; padding: 56px 28px; }
@@ -133,7 +140,8 @@
   .plan-badge {
     position: absolute;
     top: -12px;
-    right: 24px;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--crimson);
     color: var(--cream);
     font-family: 'Inter', sans-serif;
@@ -141,8 +149,9 @@
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 4px 12px;
+    padding: 4px 14px;
     border-radius: 100px;
+    white-space: nowrap;
   }
   .plan-name {
     font-family: 'Inter', sans-serif;
@@ -235,7 +244,6 @@
     .hero .sub { font-size: 16px; }
     h2 { font-size: 23px; }
     .lead { font-size: 19px; }
-    .case-text { font-size: 17px; }
     .skeptic { margin: 0 -28px; padding: 48px 24px; }
   }
   @media (prefers-reduced-motion: reduce) {
