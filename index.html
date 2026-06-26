@@ -468,7 +468,7 @@
   </section>
 
   <footer>
-    <p><span class="lpt">Cortex é feito pela <a href="labs/">Lume Labs</a>. A gente também desconfia de robô que finge ser gente.</span><span class="len">Cortex is made by <a href="labs/">Lume Labs</a>. We're also suspicious of robots that pretend to be people.</span></p>
+    <p><span class="lpt">Cortex é feito pela <a href="labs/?lang=pt">Lume Labs</a>. A gente também desconfia de robô que finge ser gente.</span><span class="len">Cortex is made by <a href="labs/?lang=en">Lume Labs</a>. We're also suspicious of robots that pretend to be people.</span></p>
   </footer>
 
 </div>
@@ -494,8 +494,11 @@
     if (btnPt) btnPt.addEventListener('click', function () { setLang('pt'); });
     if (btnEn) btnEn.addEventListener('click', function () { setLang('en'); });
 
-    // Default: inglês
-    setLang('en');
+    // Lê o idioma vindo da URL (?lang=pt ou ?lang=en), ex: link da Lume Labs.
+    // Sem o parâmetro, ou com valor inesperado, cai no padrão em inglês.
+    var params = new URLSearchParams(window.location.search);
+    var requested = params.get('lang');
+    setLang(requested === 'pt' ? 'pt' : 'en');
   })();
 </script>
 

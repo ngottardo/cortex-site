@@ -267,7 +267,7 @@
         <button id="btn-pt">PT</button>
         <button id="btn-en" class="active">EN</button>
       </div>
-      <a class="topbar-back" href="../">← Cortex</a>
+      <a class="topbar-back back-to-cortex" href="../">← Cortex</a>
       <a class="topbar-cta" href="#conversa">
         <span class="lpt"><span class="cta-short">Agendar</span><span class="cta-full">Agendar conversa</span></span>
         <span class="len"><span class="cta-short">Book a call</span><span class="cta-full">Schedule a call</span></span>
@@ -386,7 +386,7 @@
       <div class="wrap-inner">
         <span class="tag"><span class="lpt">Laboratório vivo</span><span class="len">Living lab</span></span>
         <h2><span class="lpt">A gente também constrói o que prega</span><span class="len">We also build what we preach</span></h2>
-        <p><span class="lpt">Além da consultoria, a LUME LABS desenvolve produtos próprios para testar essas ideias na prática — não só em slide. O <a href="../">Cortex</a>, nosso assistente pessoal no WhatsApp, existe para provar que IA pode ser construída com o humano no centro, mesmo quando ninguém está olhando por cima do ombro.</span><span class="len">Beyond consulting, LUME LABS builds its own products to test these ideas in practice — not just on slides. <a href="../">Cortex</a>, our personal assistant on WhatsApp, exists to prove that AI can be built with the human at the center, even when no one is looking over its shoulder.</span></p>
+        <p><span class="lpt">Além da consultoria, a LUME LABS desenvolve produtos próprios para testar essas ideias na prática — não só em slide. O <a href="../" class="back-to-cortex">Cortex</a>, nosso assistente pessoal no WhatsApp, existe para provar que IA pode ser construída com o humano no centro, mesmo quando ninguém está olhando por cima do ombro.</span><span class="len">Beyond consulting, LUME LABS builds its own products to test these ideas in practice — not just on slides. <a href="../" class="back-to-cortex">Cortex</a>, our personal assistant on WhatsApp, exists to prove that AI can be built with the human at the center, even when no one is looking over its shoulder.</span></p>
       </div>
     </div>
   </section>
@@ -406,7 +406,7 @@
   </section>
 
   <footer>
-    <p><span class="lpt">LUME LABS — estudos e consultoria em interação Humano-Máquina. Criadora também do <a href="../">Cortex</a>.</span><span class="len">LUME LABS — research and consulting in Human-Machine interaction. Also the creator of <a href="../">Cortex</a>.</span></p>
+    <p><span class="lpt">LUME LABS — estudos e consultoria em interação Humano-Máquina. Criadora também do <a href="../" class="back-to-cortex">Cortex</a>.</span><span class="len">LUME LABS — research and consulting in Human-Machine interaction. Also the creator of <a href="../" class="back-to-cortex">Cortex</a>.</span></p>
   </footer>
 
 </div>
@@ -426,12 +426,19 @@
       }
       if (btnPt) btnPt.className = (lang === 'pt') ? 'active' : '';
       if (btnEn) btnEn.className = (lang === 'en') ? 'active' : '';
+      document.querySelectorAll('.back-to-cortex').forEach(function (a) {
+        a.setAttribute('href', '../?lang=' + lang);
+      });
     }
 
     if (btnPt) btnPt.addEventListener('click', function () { setLang('pt'); });
     if (btnEn) btnEn.addEventListener('click', function () { setLang('en'); });
 
-    setLang('en');
+    // Lê o idioma vindo da URL (?lang=pt ou ?lang=en), ex: link do Cortex.
+    // Sem o parâmetro, ou com valor inesperado, cai no padrão em inglês.
+    var params = new URLSearchParams(window.location.search);
+    var requested = params.get('lang');
+    setLang(requested === 'pt' ? 'pt' : 'en');
   })();
 </script>
 
