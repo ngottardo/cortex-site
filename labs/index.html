@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,12 @@
     --cream-deep: #EFEAE0;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* i18n: mostra só o idioma ativo. Default = inglês. */
+  .len { display: inline; }
+  .lpt { display: none; }
+  html[lang="pt-BR"] .len { display: none; }
+  html[lang="pt-BR"] .lpt { display: inline; }
   html { scroll-behavior: smooth; color-scheme: light; background-color: #F7F4ED; }
   body {
     background-color: #F7F4ED;
@@ -51,7 +57,14 @@
     font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
     letter-spacing: 0.04em; color: #1A1816; white-space: nowrap;
   }
-  .topbar-actions { display: flex; align-items: center; gap: 14px; flex: 0 0 auto; }
+  .topbar-actions { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+  .lang-toggle { display: flex; gap: 2px; border: 1px solid var(--line); border-radius: 100px; padding: 3px; background: var(--cream-deep); flex: 0 0 auto; }
+  .lang-toggle button {
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.03em;
+    border: none; background: transparent; color: var(--warm-gray);
+    padding: 5px 10px; border-radius: 100px; cursor: pointer; transition: all 0.2s ease;
+  }
+  .lang-toggle button.active { background: var(--ink); color: var(--cream); }
   .topbar-back {
     font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
     color: var(--warm-gray); text-decoration: none; white-space: nowrap;
@@ -59,12 +72,14 @@
   }
   .topbar-back:hover { color: var(--ink); }
   .topbar-cta {
-    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
     color: var(--crimson); text-decoration: none; border: 1.5px solid var(--crimson);
-    padding: 7px 14px; border-radius: 100px; transition: background 0.15s ease, color 0.15s ease;
+    padding: 7px 12px; border-radius: 100px; transition: background 0.15s ease, color 0.15s ease;
     white-space: nowrap; flex: 0 0 auto;
   }
   .topbar-cta:hover { background: var(--crimson); color: var(--cream); }
+  .cta-full { display: none; }
+  .cta-short { display: inline; }
 
   @media (min-width: 600px) {
     .topbar-inner { padding: 16px 28px; gap: 18px; }
@@ -72,7 +87,9 @@
     .wordmark { font-size: 17px; letter-spacing: 0.06em; }
     .topbar-actions { gap: 18px; }
     .topbar-back { display: inline; }
-    .topbar-cta { padding: 8px 16px; }
+    .topbar-cta { padding: 8px 16px; font-size: 13px; }
+    .cta-full { display: inline; }
+    .cta-short { display: none; }
   }
 
   /* HERO */
@@ -246,8 +263,15 @@
       <span class="wordmark">LUME LABS</span>
     </div>
     <div class="topbar-actions">
+      <div class="lang-toggle">
+        <button id="btn-pt">PT</button>
+        <button id="btn-en" class="active">EN</button>
+      </div>
       <a class="topbar-back" href="../">← Cortex</a>
-      <a class="topbar-cta" href="#conversa">Agendar conversa</a>
+      <a class="topbar-cta" href="#conversa">
+        <span class="lpt"><span class="cta-short">Agendar</span><span class="cta-full">Agendar conversa</span></span>
+        <span class="len"><span class="cta-short">Book a call</span><span class="cta-full">Schedule a call</span></span>
+      </a>
     </div>
   </div>
 </div>
@@ -256,22 +280,22 @@
 
   <!-- HERO -->
   <section class="hero no-border">
-    <div class="eyebrow">COLETIVO DE ESTUDOS E CONSULTORIA</div>
-    <h1>Ajudamos empresas a entender a interação Humano-Máquina — olhando primeiro para o humano.</h1>
-    <p class="sub">A maioria das consultorias de IA começa pela tecnologia. A LUME LABS começa pela pessoa que vai usar, conviver e, às vezes, desconfiar dela. A tecnologia entra depois — como meio, não como ponto de partida.</p>
+    <div class="eyebrow"><span class="lpt">COLETIVO DE ESTUDOS E CONSULTORIA</span><span class="len">RESEARCH & CONSULTING COLLECTIVE</span></div>
+    <h1><span class="lpt">Ajudamos empresas a entender a interação Humano-Máquina — olhando primeiro para o humano.</span><span class="len">We help companies understand Human-Machine interaction — looking at the human first.</span></h1>
+    <p class="sub"><span class="lpt">A maioria das consultorias de IA começa pela tecnologia. A LUME LABS começa pela pessoa que vai usar, conviver e, às vezes, desconfiar dela. A tecnologia entra depois — como meio, não como ponto de partida.</span><span class="len">Most AI consultancies start with the technology. LUME LABS starts with the person who will use it, live alongside it, and sometimes distrust it. Technology comes in afterward — as a means, not a starting point.</span></p>
   </section>
 
   <!-- O QUE FAZEMOS -->
   <section>
-    <h2>O que fazemos</h2>
-    <p>Trabalhamos com empresas que estão introduzindo IA em produtos, atendimento ou processos internos e querem fazer isso sem perder o que faz uma experiência ser boa para quem está do outro lado da tela.</p>
-    <p>Isso aparece como diagnóstico de experiência Humano-Máquina, desenho de produtos e fluxos com IA centrados em comportamento real de uso, e formação de times e lideranças para tomar decisões melhores sobre onde a IA deve — e não deve — atuar.</p>
+    <h2><span class="lpt">O que fazemos</span><span class="len">What we do</span></h2>
+    <p><span class="lpt">Trabalhamos com empresas que estão introduzindo IA em produtos, atendimento ou processos internos e querem fazer isso sem perder o que faz uma experiência ser boa para quem está do outro lado da tela.</span><span class="len">We work with companies introducing AI into products, support, or internal processes who want to do it without losing what makes an experience good for the person on the other side of the screen.</span></p>
+    <p><span class="lpt">Isso aparece como diagnóstico de experiência Humano-Máquina, desenho de produtos e fluxos com IA centrados em comportamento real de uso, e formação de times e lideranças para tomar decisões melhores sobre onde a IA deve — e não deve — atuar.</span><span class="len">In practice, that means Human-Machine experience diagnostics, designing AI products and flows centered on real usage behavior, and training teams and leadership to make better decisions about where AI should — and shouldn't — act.</span></p>
   </section>
 
   <!-- POR QUE ESSE TIME -->
   <section>
-    <h2>Por que ouvir a gente sobre isso</h2>
-    <p class="lead">Não chegamos à IA pelo hype. Chegamos por anos vendo o que acontece quando produto, pesquisa e atendimento se encontram com escala real — e com a falta dela.</p>
+    <h2><span class="lpt">Por que ouvir a gente sobre isso</span><span class="len">Why listen to us on this</span></h2>
+    <p class="lead"><span class="lpt">Não chegamos à IA pelo hype. Chegamos por anos vendo o que acontece quando produto, pesquisa e atendimento se encontram com escala real — e com a falta dela.</span><span class="len">We didn't arrive at AI through hype. We got here through years of seeing what happens when product, research, and customer support meet real scale — and the lack of it.</span></p>
 
     <div class="cred-grid">
       <div class="cred">
@@ -284,8 +308,8 @@
           </svg>
         </div>
         <div class="cred-body">
-          <div class="cred-label">Pesquisa de UX</div>
-          <div class="cred-text">Pesquisadores que passaram por <b>consultorias americanas de UX</b>, trazendo método rigoroso de entrevista, teste e observação de comportamento — não opinião de palco sobre como pessoas usam tecnologia.</div>
+          <div class="cred-label"><span class="lpt">Pesquisa de UX</span><span class="len">UX Research</span></div>
+          <div class="cred-text"><span class="lpt">Pesquisadores que passaram por <b>consultorias americanas de UX</b>, trazendo método rigoroso de entrevista, teste e observação de comportamento — não opinião de palco sobre como pessoas usam tecnologia.</span><span class="len">Researchers who came through <b>American UX consultancies</b>, bringing rigorous interview, testing, and behavior-observation method — not stage opinions about how people use technology.</span></div>
         </div>
       </div>
 
@@ -299,8 +323,8 @@
           </svg>
         </div>
         <div class="cred-body">
-          <div class="cred-label">Produto e sucesso do cliente, em escala</div>
-          <div class="cred-text">Profissionais que construíram produto e relacionamento com cliente em ambientes de <b>mais de 60 milhões de usuários</b> — onde cada decisão de interface ou de automação se multiplica antes de qualquer um perceber o erro.</div>
+          <div class="cred-label"><span class="lpt">Produto e sucesso do cliente, em escala</span><span class="len">Product and customer success, at scale</span></div>
+          <div class="cred-text"><span class="lpt">Profissionais que construíram produto e relacionamento com cliente em ambientes de <b>mais de 60 milhões de usuários</b> — onde cada decisão de interface ou de automação se multiplica antes de qualquer um perceber o erro.</span><span class="len">Professionals who built product and customer relationships in environments with <b>more than 60 million users</b> — where every interface or automation decision multiplies before anyone notices the mistake.</span></div>
         </div>
       </div>
 
@@ -315,8 +339,8 @@
           </svg>
         </div>
         <div class="cred-body">
-          <div class="cred-label">Startups early-stage</div>
-          <div class="cred-text">E também o outro extremo: construir do zero, em <b>startups early-stage</b>, onde não existe usuário de sobra para absorver um produto mal desenhado — cada decisão precisa estar certa porque não há volume pra disfarçar erro.</div>
+          <div class="cred-label"><span class="lpt">Startups early-stage</span><span class="len">Early-stage startups</span></div>
+          <div class="cred-text"><span class="lpt">E também o outro extremo: construir do zero, em <b>startups early-stage</b>, onde não existe usuário de sobra para absorver um produto mal desenhado — cada decisão precisa estar certa porque não há volume pra disfarçar erro.</span><span class="len">And also the other extreme: building from scratch, at <b>early-stage startups</b>, where there's no surplus of users to absorb a poorly designed product — every decision has to be right because there's no volume to hide a mistake.</span></div>
         </div>
       </div>
     </div>
@@ -324,34 +348,34 @@
     <div class="stat-strip">
       <div class="stat">
         <div class="stat-num">60M+</div>
-        <div class="stat-label">usuários em produtos onde nosso time atuou em pesquisa, produto ou sucesso do cliente</div>
+        <div class="stat-label"><span class="lpt">usuários em produtos onde nosso time atuou em pesquisa, produto ou sucesso do cliente</span><span class="len">users across products where our team worked in research, product, or customer success</span></div>
       </div>
       <div class="stat">
         <div class="stat-num">2</div>
-        <div class="stat-label">extremos de escala — gigante estabelecido e startup early-stage — na mesma mesa</div>
+        <div class="stat-label"><span class="lpt">extremos de escala — gigante estabelecido e startup early-stage — na mesma mesa</span><span class="len">extremes of scale — established giant and early-stage startup — at the same table</span></div>
       </div>
       <div class="stat">
         <div class="stat-num">1</div>
-        <div class="stat-label">princípio guiando tudo: humano antes da tecnologia</div>
+        <div class="stat-label"><span class="lpt">princípio guiando tudo: humano antes da tecnologia</span><span class="len">guiding principle: human before technology</span></div>
       </div>
     </div>
   </section>
 
   <!-- COMO TRABALHAMOS -->
   <section>
-    <h2>Como pensamos esse trabalho</h2>
+    <h2><span class="lpt">Como pensamos esse trabalho</span><span class="len">How we think about this work</span></h2>
     <div class="approach-list">
       <div class="approach-item">
         <div class="approach-num">1</div>
-        <div class="approach-text"><b>Primeiro, observamos comportamento real</b> — não o que as pessoas dizem que fariam com IA, mas o que de fato fazem quando ela aparece no caminho.</div>
+        <div class="approach-text"><span class="lpt"><b>Primeiro, observamos comportamento real</b> — não o que as pessoas dizem que fariam com IA, mas o que de fato fazem quando ela aparece no caminho.</span><span class="len"><b>First, we observe real behavior</b> — not what people say they'd do with AI, but what they actually do when it shows up in their way.</span></div>
       </div>
       <div class="approach-item">
         <div class="approach-num">2</div>
-        <div class="approach-text"><b>Depois, decidimos o que automatizar e o que proteger</b> — nem toda interação deveria ser eficiente. Algumas precisam continuar sendo lentas, humanas, com atrito de propósito.</div>
+        <div class="approach-text"><span class="lpt"><b>Depois, decidimos o que automatizar e o que proteger</b> — nem toda interação deveria ser eficiente. Algumas precisam continuar sendo lentas, humanas, com atrito de propósito.</span><span class="len"><b>Then, we decide what to automate and what to protect</b> — not every interaction should be efficient. Some need to stay slow, human, with deliberate friction.</span></div>
       </div>
       <div class="approach-item">
         <div class="approach-num">3</div>
-        <div class="approach-text"><b>Só então desenhamos a solução técnica</b> — porque a pergunta certa nunca é &ldquo;que IA usar&rdquo;, é &ldquo;o que essa pessoa precisa que alguém, ou alguma coisa, cuide por ela&rdquo;.</div>
+        <div class="approach-text"><span class="lpt"><b>Só então desenhamos a solução técnica</b> — porque a pergunta certa nunca é &ldquo;que IA usar&rdquo;, é &ldquo;o que essa pessoa precisa que alguém, ou alguma coisa, cuide por ela&rdquo;.</span><span class="len"><b>Only then do we design the technical solution</b> — because the right question is never &ldquo;which AI to use,&rdquo; it's &ldquo;what does this person need someone, or something, to take care of for them.&rdquo;</span></div>
       </div>
     </div>
   </section>
@@ -360,29 +384,56 @@
   <section class="no-border">
     <div class="lab-note">
       <div class="wrap-inner">
-        <span class="tag">Laboratório vivo</span>
-        <h2>A gente também constrói o que prega</h2>
-        <p>Além da consultoria, a LUME LABS desenvolve produtos próprios para testar essas ideias na prática — não só em slide. O <a href="../">Cortex</a>, nosso assistente pessoal no WhatsApp, existe para provar que IA pode ser construída com o humano no centro, mesmo quando ninguém está olhando por cima do ombro.</p>
+        <span class="tag"><span class="lpt">Laboratório vivo</span><span class="len">Living lab</span></span>
+        <h2><span class="lpt">A gente também constrói o que prega</span><span class="len">We also build what we preach</span></h2>
+        <p><span class="lpt">Além da consultoria, a LUME LABS desenvolve produtos próprios para testar essas ideias na prática — não só em slide. O <a href="../">Cortex</a>, nosso assistente pessoal no WhatsApp, existe para provar que IA pode ser construída com o humano no centro, mesmo quando ninguém está olhando por cima do ombro.</span><span class="len">Beyond consulting, LUME LABS builds its own products to test these ideas in practice — not just on slides. <a href="../">Cortex</a>, our personal assistant on WhatsApp, exists to prove that AI can be built with the human at the center, even when no one is looking over its shoulder.</span></p>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta-section" id="conversa">
-    <h2>Quer conversar sobre o seu caso?</h2>
-    <p class="lead">Sem formulário longo. Manda uma mensagem e a gente entende juntos onde a IA deveria, e onde não deveria, entrar no seu produto.</p>
-    <a class="wa-button" href="https://wa.me/5527999301150?text=Oi!%20Vim%20pela%20p%C3%A1gina%20da%20LUME%20LABS%20e%20quero%20entender%20melhor%20a%20consultoria%20de%20intera%C3%A7%C3%A3o%20Humano-M%C3%A1quina." target="_blank" rel="noopener">
+    <h2><span class="lpt">Quer conversar sobre o seu caso?</span><span class="len">Want to talk about your case?</span></h2>
+    <p class="lead"><span class="lpt">Sem formulário longo. Manda uma mensagem e a gente entende juntos onde a IA deveria, e onde não deveria, entrar no seu produto.</span><span class="len">No long form. Send a message and we'll figure out together where AI should, and shouldn't, enter your product.</span></p>
+    <a class="wa-button" id="wa-link" href="https://wa.me/5527999301150?text=Oi!%20Vim%20pela%20p%C3%A1gina%20da%20LUME%20LABS%20e%20quero%20entender%20melhor%20a%20consultoria%20de%20intera%C3%A7%C3%A3o%20Humano-M%C3%A1quina."
+       data-pt-href="https://wa.me/5527999301150?text=Oi!%20Vim%20pela%20p%C3%A1gina%20da%20LUME%20LABS%20e%20quero%20entender%20melhor%20a%20consultoria%20de%20intera%C3%A7%C3%A3o%20Humano-M%C3%A1quina."
+       data-en-href="https://wa.me/5527999301150?text=Hi!%20I%20came%20from%20the%20LUME%20LABS%20page%20and%20want%20to%20learn%20more%20about%20the%20Human-Machine%20interaction%20consulting."
+       target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A8 8 0 0 0 4.9 16.1L4 20l4-1a8 8 0 0 0 3.8 1 8 8 0 0 0 5.8-13.7zm-5.7 12.3a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3a6.7 6.7 0 1 1 5.6 3zm3.7-5c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.5.1l-.6.7c-.1.2-.2.2-.5.1a5.4 5.4 0 0 1-1.6-1 6 6 0 0 1-1.1-1.4c-.1-.2 0-.3.1-.4l.3-.4.2-.3v-.4l-.6-1.4c-.2-.4-.3-.3-.5-.3h-.4a.8.8 0 0 0-.6.3 2.5 2.5 0 0 0-.7 1.8 4.3 4.3 0 0 0 .9 2.2 9.7 9.7 0 0 0 3.7 3.3c1.4.5 1.4.4 1.7.3a2.1 2.1 0 0 0 1.4-1c.2-.4.2-.8.1-.9z"/></svg>
-      <span>Conversar no WhatsApp</span>
+      <span><span class="lpt">Conversar no WhatsApp</span><span class="len">Chat on WhatsApp</span></span>
     </a>
-    <p class="cta-note">Mensagem inicial já preenchida — só ajustar e enviar. A conversa serve para entender seu contexto antes de qualquer proposta.</p>
+    <p class="cta-note"><span class="lpt">Mensagem inicial já preenchida — só ajustar e enviar. A conversa serve para entender seu contexto antes de qualquer proposta.</span><span class="len">Initial message already filled in — just adjust and send. The conversation is meant to understand your context before any proposal.</span></p>
   </section>
 
   <footer>
-    <p>LUME LABS — estudos e consultoria em interação Humano-Máquina. Criadora também do <a href="../">Cortex</a>.</p>
+    <p><span class="lpt">LUME LABS — estudos e consultoria em interação Humano-Máquina. Criadora também do <a href="../">Cortex</a>.</span><span class="len">LUME LABS — research and consulting in Human-Machine interaction. Also the creator of <a href="../">Cortex</a>.</span></p>
   </footer>
 
 </div>
+
+<script>
+  (function () {
+    var htmlEl = document.documentElement;
+    var btnPt = document.getElementById('btn-pt');
+    var btnEn = document.getElementById('btn-en');
+    var wa = document.getElementById('wa-link');
+
+    function setLang(lang) {
+      htmlEl.setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
+      if (wa) {
+        var href = wa.getAttribute('data-' + lang + '-href');
+        if (href) wa.setAttribute('href', href);
+      }
+      if (btnPt) btnPt.className = (lang === 'pt') ? 'active' : '';
+      if (btnEn) btnEn.className = (lang === 'en') ? 'active' : '';
+    }
+
+    if (btnPt) btnPt.addEventListener('click', function () { setLang('pt'); });
+    if (btnEn) btnEn.addEventListener('click', function () { setLang('en'); });
+
+    setLang('en');
+  })();
+</script>
 
 </body>
 </html>
