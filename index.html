@@ -118,7 +118,74 @@
     font-size: 16px; color: var(--warm-gray); max-width: 500px; margin: 0 auto;
   }
 
-  /* PRICING */
+  /* DEMO MOCKUP */
+  .demo-section { padding: 48px 0 56px; border-top: 1px solid var(--line); }
+  .demo-intro { text-align: center; margin-bottom: 8px; }
+  .demo-tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--crimson);
+    border: 1px solid var(--crimson); border-radius: 100px; padding: 4px 13px; margin-bottom: 18px;
+  }
+  .demo-frame {
+    max-width: 380px; margin: 28px auto 0;
+    background: var(--cream-deep);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 18px 16px 22px;
+    box-shadow: 0 18px 40px -20px rgba(26,24,22,0.18);
+  }
+  .demo-frame-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 4px 14px; margin-bottom: 14px; border-bottom: 1px solid var(--line);
+  }
+  .demo-frame-header svg { width: 26px; height: 26px; flex: 0 0 auto; }
+  .demo-frame-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); }
+  .demo-frame-sub { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--warm-gray); }
+
+  .demo-msg-row { display: flex; margin-bottom: 10px; }
+  .demo-msg-row.out { justify-content: flex-end; }
+  .demo-bubble {
+    max-width: 82%;
+    padding: 9px 13px;
+    border-radius: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.42;
+  }
+  .demo-msg-row.in .demo-bubble {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-bottom-left-radius: 4px;
+    color: var(--ink);
+  }
+  .demo-msg-row.out .demo-bubble {
+    background: var(--crimson);
+    border-bottom-right-radius: 4px;
+    color: var(--cream);
+  }
+  .demo-time {
+    display: block; font-size: 10px; margin-top: 3px; opacity: 0.6; text-align: right;
+  }
+  .demo-msg-row.in .demo-time { color: var(--warm-gray); }
+  .demo-msg-row.out .demo-time { color: var(--cream); }
+  .demo-system-note {
+    text-align: center; font-family: 'Inter', sans-serif; font-size: 11px;
+    color: var(--warm-gray); margin: 14px 0; letter-spacing: 0.02em;
+  }
+  .demo-caption {
+    text-align: center; margin-top: 24px;
+  }
+  .demo-caption p {
+    font-family: 'EB Garamond', serif; font-style: italic; font-size: 16px;
+    color: var(--warm-gray); max-width: 480px; margin: 0 auto;
+  }
+
+  @media (min-width: 600px) {
+    .demo-section { padding: 56px 0 64px; }
+    .demo-frame { padding: 20px 18px 26px; }
+  }
+
   .pricing-grid {
     display: flex;
     gap: 20px;
@@ -400,6 +467,83 @@
     </div>
 
     <p class="closer"><span class="lpt">Números diferentes, mesmo picadeiro: a tecnologia faz o truque, mas o artista principal é você.</span><span class="len">Different acts, same ring: the technology does the trick, but you're the headline performer.</span></p>
+  </section>
+
+  <!-- DEMO MOCKUP -->
+  <section class="demo-section">
+    <div class="demo-intro">
+      <span class="demo-tag"><span class="lpt">COMO É NA PRÁTICA</span><span class="len">WHAT IT LOOKS LIKE</span></span>
+    </div>
+
+    <div class="demo-frame">
+      <div class="demo-frame-header">
+        <svg viewBox="0 0 48 48"><use href="#cortex-mark"/></svg>
+        <div>
+          <div class="demo-frame-title">Cortex</div>
+          <div class="demo-frame-sub"><span class="lpt">conversa de exemplo</span><span class="len">example conversation</span></div>
+        </div>
+      </div>
+
+      <div class="demo-msg-row in">
+        <div class="demo-bubble">
+          <span class="lpt">Bom dia, Helena! Hoje o remédio da pressão é depois do almoço — me conta quando almoçar que eu te lembro 🙂</span>
+          <span class="len">Morning, Helena! Today's blood pressure pill is after lunch — let me know when you eat and I'll remind you 🙂</span>
+          <span class="demo-time">8:02</span>
+        </div>
+      </div>
+
+      <div class="demo-msg-row out">
+        <div class="demo-bubble">
+          <span class="lpt">Acabei de almoçar!</span>
+          <span class="len">Just had lunch!</span>
+          <span class="demo-time">13:14</span>
+        </div>
+      </div>
+
+      <div class="demo-msg-row in">
+        <div class="demo-bubble">
+          <span class="lpt">Anotado. Remédio da pressão agora, então — um comprimido, com água. ✅</span>
+          <span class="len">Got it. Blood pressure pill now, then — one tablet, with water. ✅</span>
+          <span class="demo-time">13:14</span>
+        </div>
+      </div>
+
+      <div class="demo-system-note">
+        <span class="lpt">— 22 min depois —</span><span class="len">— 22 min later —</span>
+      </div>
+
+      <div class="demo-msg-row out">
+        <div class="demo-bubble">
+          <span class="lpt">Tomei ✅</span>
+          <span class="len">Took it ✅</span>
+          <span class="demo-time">13:36</span>
+        </div>
+      </div>
+
+      <div class="demo-system-note">
+        <span class="lpt">— Helena delega uma tarefa para a filha —</span><span class="len">— Helena delegates a task to her daughter —</span>
+      </div>
+
+      <div class="demo-msg-row out">
+        <div class="demo-bubble">
+          <span class="lpt">Cortex, pede pra Nat passear com o Tobby hoje à noite, eu vou sair</span>
+          <span class="len">Cortex, ask Nat to walk Tobby tonight, I'm going out</span>
+          <span class="demo-time">17:50</span>
+        </div>
+      </div>
+
+      <div class="demo-msg-row in">
+        <div class="demo-bubble">
+          <span class="lpt">Combinado — avisei a Nat. Te conto quando ela confirmar.</span>
+          <span class="len">Done — let Nat know. I'll tell you when she confirms.</span>
+          <span class="demo-time">17:50</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-caption">
+      <p><span class="lpt">Conversa ilustrativa, inspirada em um uso real de cuidado familiar. Nomes fictícios — privacidade de quem inspirou o Cortex em primeiro lugar.</span><span class="len">Illustrative conversation, inspired by a real family caregiving use case. Fictional names — privacy for the person who inspired Cortex in the first place.</span></p>
+    </div>
   </section>
 
   <!-- PIADA DO TRAVESSÃO -->
