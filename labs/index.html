@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>LUME LABS — Interação Humano-Máquina, com o humano primeiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4ED;
+    --ink: #1A1816;
+    --crimson: #A8231E;
+    --warm-gray: #6B6359;
+    --line: #D6CFC0;
+    --cream-deep: #EFEAE0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; color-scheme: light; background-color: #F7F4ED; }
+  body {
+    background-color: #F7F4ED;
+    color: #1A1816;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+
+  /* TOPBAR */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247,244,237,0.94);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    max-width: 720px; margin: 0 auto; padding: 16px 28px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand svg { width: 28px; height: 28px; display: block; }
+  .wordmark {
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px;
+    letter-spacing: 0.06em; color: #1A1816;
+  }
+  .topbar-actions { display: flex; align-items: center; gap: 18px; }
+  .topbar-back {
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--warm-gray); text-decoration: none;
+  }
+  .topbar-back:hover { color: var(--ink); }
+  .topbar-cta {
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--crimson); text-decoration: none; border: 1px solid var(--crimson);
+    padding: 8px 16px; border-radius: 100px; transition: background 0.15s ease, color 0.15s ease;
+  }
+  .topbar-cta:hover { background: var(--crimson); color: var(--cream); }
+
+  /* HERO */
+  .hero { padding: 76px 0 56px; }
+  .eyebrow {
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--crimson); margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'EB Garamond', serif; font-weight: 500; font-size: 42px;
+    line-height: 1.2; letter-spacing: -0.01em; max-width: 620px; margin-bottom: 24px; color: #1A1816;
+  }
+  .hero .sub { font-size: 18px; color: var(--warm-gray); max-width: 560px; }
+
+  /* SECTIONS */
+  section { padding: 52px 0; border-top: 1px solid var(--line); }
+  section.no-border { border-top: none; }
+  h2 {
+    font-family: 'EB Garamond', serif; font-weight: 500; font-size: 27px;
+    line-height: 1.3; margin-bottom: 20px; max-width: 560px; color: #1A1816;
+  }
+  p { margin-bottom: 16px; max-width: 600px; color: #1A1816; }
+  p a { color: var(--crimson); text-decoration: none; border-bottom: 1px solid var(--line); }
+  p a:hover { border-bottom-color: var(--crimson); }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-family: 'EB Garamond', serif; font-size: 20px; line-height: 1.5; max-width: 580px; color: var(--ink); }
+
+  /* CREDENTIAL GRID */
+  .cred-grid { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+  .cred {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 22px 0; border-top: 1px solid var(--line);
+  }
+  .cred:first-child { border-top: none; }
+  .cred-icon { flex: 0 0 auto; width: 36px; height: 36px; margin-top: 2px; }
+  .cred-icon svg { width: 36px; height: 36px; display: block; }
+  .cred-body { flex: 1; }
+  .cred-label {
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--crimson); margin-bottom: 5px;
+  }
+  .cred-text { font-size: 16px; color: #1A1816; line-height: 1.5; }
+  .cred-text b { font-weight: 600; }
+
+  /* STAT STRIP */
+  .stat-strip {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    margin: 32px 0 0; padding: 28px 0 0; border-top: 1px solid var(--line);
+  }
+  .stat { flex: 1 1 140px; }
+  .stat-num {
+    font-family: 'EB Garamond', serif; font-size: 32px; color: var(--crimson); line-height: 1; margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--warm-gray); line-height: 1.4; }
+
+  /* APPROACH LIST */
+  .approach-list { margin-top: 24px; }
+  .approach-item {
+    display: flex; gap: 16px; padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .approach-item:first-child { border-top: none; }
+  .approach-num {
+    font-family: 'EB Garamond', serif; font-style: italic; font-size: 20px;
+    color: var(--crimson); flex: 0 0 32px;
+  }
+  .approach-text { font-size: 16px; color: #1A1816; }
+  .approach-text b { font-weight: 600; }
+
+  /* CORTEX MENTION */
+  .lab-note {
+    background: var(--cream-deep);
+    margin: 0 -28px;
+    padding: 40px 28px;
+    border-radius: 0;
+  }
+  .lab-note .wrap-inner { max-width: 600px; margin: 0 auto; }
+  .lab-note .tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--crimson);
+    border: 1px solid var(--crimson); border-radius: 100px; padding: 4px 12px; margin-bottom: 16px;
+  }
+
+  /* CTA */
+  .cta-section { text-align: center; padding-bottom: 80px; }
+  .cta-section h2 { margin: 0 auto 14px; }
+  .cta-section .lead { margin: 0 auto 32px; }
+  .wa-button {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+    padding: 16px 30px; border-radius: 100px; border: none;
+    background: var(--crimson); color: var(--cream);
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .wa-button:hover { background: #8c1c18; }
+  .wa-button:active { transform: scale(0.97); }
+  .wa-button svg { width: 20px; height: 20px; }
+  .cta-note { font-size: 13px; color: var(--warm-gray); margin: 20px auto 0; max-width: 460px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; text-align: center; }
+  footer p { margin: 0 auto; font-size: 13px; color: var(--warm-gray); }
+  footer a { color: var(--crimson); text-decoration: none; }
+
+  @media (max-width: 540px) {
+    .hero { padding: 52px 0 44px; }
+    .hero h1 { font-size: 32px; }
+    .hero .sub { font-size: 16px; }
+    h2 { font-size: 22px; }
+    .lead { font-size: 18px; }
+    .stat-strip { gap: 28px 20px; }
+    .lab-note { margin: 0 -28px; padding: 36px 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGO (cérebro eletrônico, reaproveitado da identidade Cortex/Lume) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="lume-mark" viewBox="0 0 48 48">
+      <path d="M24 8
+               C17 8 12 12 12 18
+               C9 19 8 22 9 25
+               C8 28 10 31 13 32
+               C13 36 17 39 21 39
+               C22 39 23 38.5 24 37.5"
+            fill="none" stroke="#1A1816" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M24 8 L31 8 L31 13 M31 13 L37 13 M37 13 L37 20
+               M24 19 L34 19 M34 19 L34 25 M34 25 L39 25
+               M24 30 L32 30 L32 36 M32 36 L37 36
+               M24 8 L24 37.5"
+            fill="none" stroke="#A8231E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="37" cy="13" r="1.7" fill="#A8231E"/>
+      <circle cx="37" cy="20" r="1.7" fill="#A8231E"/>
+      <circle cx="39" cy="25" r="1.7" fill="#A8231E"/>
+      <circle cx="37" cy="36" r="1.7" fill="#A8231E"/>
+      <circle cx="34" cy="19" r="1.4" fill="#1A1816"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg><use href="#lume-mark"/></svg>
+      <span class="wordmark">LUME LABS</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="topbar-back" href="/">← Cortex</a>
+      <a class="topbar-cta" href="#conversa">Agendar conversa</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero no-border">
+    <div class="eyebrow">COLETIVO DE ESTUDOS E CONSULTORIA</div>
+    <h1>Ajudamos empresas a entender a interação Humano-Máquina — olhando primeiro para o humano.</h1>
+    <p class="sub">A maioria das consultorias de IA começa pela tecnologia. A LUME LABS começa pela pessoa que vai usar, conviver e, às vezes, desconfiar dela. A tecnologia entra depois — como meio, não como ponto de partida.</p>
+  </section>
+
+  <!-- O QUE FAZEMOS -->
+  <section>
+    <h2>O que fazemos</h2>
+    <p>Trabalhamos com empresas que estão introduzindo IA em produtos, atendimento ou processos internos e querem fazer isso sem perder o que faz uma experiência ser boa para quem está do outro lado da tela.</p>
+    <p>Isso aparece como diagnóstico de experiência Humano-Máquina, desenho de produtos e fluxos com IA centrados em comportamento real de uso, e formação de times e lideranças para tomar decisões melhores sobre onde a IA deve — e não deve — atuar.</p>
+  </section>
+
+  <!-- POR QUE ESSE TIME -->
+  <section>
+    <h2>Por que ouvir a gente sobre isso</h2>
+    <p class="lead">Não chegamos à IA pelo hype. Chegamos por anos vendo o que acontece quando produto, pesquisa e atendimento se encontram com escala real — e com a falta dela.</p>
+
+    <div class="cred-grid">
+      <div class="cred">
+        <div class="cred-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#A8231E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="19" cy="19" r="9"/>
+            <path d="M25.5 25.5 L34 34"/>
+            <path d="M14 16 C16 13 22 13 24 16" stroke-dasharray="1 3"/>
+            <circle cx="19" cy="19" r="3.2"/>
+          </svg>
+        </div>
+        <div class="cred-body">
+          <div class="cred-label">Pesquisa de UX</div>
+          <div class="cred-text">Pesquisadores que passaram por <b>consultorias americanas de UX</b>, trazendo método rigoroso de entrevista, teste e observação de comportamento — não opinião de palco sobre como pessoas usam tecnologia.</div>
+        </div>
+      </div>
+
+      <div class="cred">
+        <div class="cred-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#A8231E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="14" r="2.2"/><circle cx="24" cy="11" r="2.2"/><circle cx="34" cy="14" r="2.2"/>
+            <circle cx="14" cy="34" r="2.2"/><circle cx="24" cy="37" r="2.2"/><circle cx="34" cy="34" r="2.2"/>
+            <path d="M14 16 L14 32 M34 16 L34 32 M24 13 L24 35" stroke-dasharray="1 3"/>
+            <path d="M16 14 L22 11.5 M26 11.5 L32 14 M16 34 L22 36.5 M26 36.5 L32 34"/>
+          </svg>
+        </div>
+        <div class="cred-body">
+          <div class="cred-label">Produto e sucesso do cliente, em escala</div>
+          <div class="cred-text">Profissionais que construíram produto e relacionamento com cliente em ambientes de <b>mais de 60 milhões de usuários</b> — onde cada decisão de interface ou de automação se multiplica antes de qualquer um perceber o erro.</div>
+        </div>
+      </div>
+
+      <div class="cred">
+        <div class="cred-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#A8231E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 8 L24 4 M24 4 L20 4 M24 4 L28 4"/>
+            <path d="M14 40 L14 22 C14 16 18 12 24 12 C30 12 34 16 34 22 L34 40 Z"/>
+            <path d="M14 28 L34 28"/>
+            <circle cx="19" cy="34" r="1.4" fill="#A8231E"/>
+            <circle cx="29" cy="34" r="1.4" fill="#A8231E"/>
+          </svg>
+        </div>
+        <div class="cred-body">
+          <div class="cred-label">Startups early-stage</div>
+          <div class="cred-text">E também o outro extremo: construir do zero, em <b>startups early-stage</b>, onde não existe usuário de sobra para absorver um produto mal desenhado — cada decisão precisa estar certa porque não há volume pra disfarçar erro.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat">
+        <div class="stat-num">60M+</div>
+        <div class="stat-label">usuários em produtos onde nosso time atuou em pesquisa, produto ou sucesso do cliente</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">extremos de escala — gigante estabelecido e startup early-stage — na mesma mesa</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1</div>
+        <div class="stat-label">princípio guiando tudo: humano antes da tecnologia</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO TRABALHAMOS -->
+  <section>
+    <h2>Como pensamos esse trabalho</h2>
+    <div class="approach-list">
+      <div class="approach-item">
+        <div class="approach-num">1</div>
+        <div class="approach-text"><b>Primeiro, observamos comportamento real</b> — não o que as pessoas dizem que fariam com IA, mas o que de fato fazem quando ela aparece no caminho.</div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">2</div>
+        <div class="approach-text"><b>Depois, decidimos o que automatizar e o que proteger</b> — nem toda interação deveria ser eficiente. Algumas precisam continuar sendo lentas, humanas, com atrito de propósito.</div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">3</div>
+        <div class="approach-text"><b>Só então desenhamos a solução técnica</b> — porque a pergunta certa nunca é &ldquo;que IA usar&rdquo;, é &ldquo;o que essa pessoa precisa que alguém, ou alguma coisa, cuide por ela&rdquo;.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORTEX AS LIVING LAB -->
+  <section class="no-border">
+    <div class="lab-note">
+      <div class="wrap-inner">
+        <span class="tag">Laboratório vivo</span>
+        <h2>A gente também constrói o que prega</h2>
+        <p>Além da consultoria, a LUME LABS desenvolve produtos próprios para testar essas ideias na prática — não só em slide. O <a href="/">Cortex</a>, nosso assistente pessoal no WhatsApp, existe para provar que IA pode ser construída com o humano no centro, mesmo quando ninguém está olhando por cima do ombro.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="conversa">
+    <h2>Quer conversar sobre o seu caso?</h2>
+    <p class="lead">Sem formulário longo. Manda uma mensagem e a gente entende juntos onde a IA deveria, e onde não deveria, entrar no seu produto.</p>
+    <a class="wa-button" href="https://wa.me/5527999301150?text=Oi!%20Vim%20pela%20p%C3%A1gina%20da%20LUME%20LABS%20e%20quero%20entender%20melhor%20a%20consultoria%20de%20intera%C3%A7%C3%A3o%20Humano-M%C3%A1quina." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A8 8 0 0 0 4.9 16.1L4 20l4-1a8 8 0 0 0 3.8 1 8 8 0 0 0 5.8-13.7zm-5.7 12.3a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3a6.7 6.7 0 1 1 5.6 3zm3.7-5c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.5.1l-.6.7c-.1.2-.2.2-.5.1a5.4 5.4 0 0 1-1.6-1 6 6 0 0 1-1.1-1.4c-.1-.2 0-.3.1-.4l.3-.4.2-.3v-.4l-.6-1.4c-.2-.4-.3-.3-.5-.3h-.4a.8.8 0 0 0-.6.3 2.5 2.5 0 0 0-.7 1.8 4.3 4.3 0 0 0 .9 2.2 9.7 9.7 0 0 0 3.7 3.3c1.4.5 1.4.4 1.7.3a2.1 2.1 0 0 0 1.4-1c.2-.4.2-.8.1-.9z"/></svg>
+      <span>Conversar no WhatsApp</span>
+    </a>
+    <p class="cta-note">Mensagem inicial já preenchida — só ajustar e enviar. A conversa serve para entender seu contexto antes de qualquer proposta.</p>
+  </section>
+
+  <footer>
+    <p>LUME LABS — estudos e consultoria em interação Humano-Máquina. Criadora também do <a href="/">Cortex</a>.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
