@@ -1,650 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light only">
-<meta name="supported-color-schemes" content="light">
-<title>Cortex — A IA mais inteligente é a que você esquece que existe</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #F7F4ED;
-    --ink: #1A1816;
-    --crimson: #A8231E;
-    --warm-gray: #8C8478;
-    --line: #D6CFC0;
-    --cream-deep: #EFEAE0;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  /* i18n: mostra só o idioma ativo. Default = inglês. */
-  .len { display: inline; }
-  .lpt { display: none; }
-  html[lang="pt-BR"] .len { display: none; }
-  html[lang="pt-BR"] .lpt { display: inline; }
-  html { scroll-behavior: smooth; color-scheme: light; background-color: #F7F4ED; }
-  body {
-    background-color: #F7F4ED;
-    color: #1A1816;
-    font-family: 'Inter', sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 28px; }
-
-  /* TOP BAR */
-  .topbar {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(247,244,237,0.92);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar-inner {
-    max-width: 680px; margin: 0 auto; padding: 14px 28px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand svg { width: 30px; height: 30px; display: block; }
-  .wordmark { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.01em; color: #1A1816; }
-
-  .lang-toggle { display: flex; gap: 2px; border: 1px solid var(--line); border-radius: 100px; padding: 3px; background: var(--cream-deep); }
-  .lang-toggle button {
-    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
-    border: none; background: transparent; color: var(--warm-gray);
-    padding: 6px 13px; border-radius: 100px; cursor: pointer; transition: all 0.2s ease;
-  }
-  .lang-toggle button.active { background: var(--ink); color: var(--cream); }
-
-  /* HERO */
-  .hero { padding: 80px 0 60px; text-align: center; }
-  .hero-logo { width: 64px; height: 64px; margin: 0 auto 28px; display: block; }
-  .eyebrow {
-    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--crimson); margin-bottom: 22px;
-  }
-  .hero h1 {
-    font-family: 'EB Garamond', serif; font-weight: 500; font-size: 44px;
-    line-height: 1.18; letter-spacing: -0.01em; max-width: 560px; margin: 0 auto 26px; color: #1A1816;
-  }
-  .hero .sub { font-size: 18px; color: var(--warm-gray); max-width: 460px; margin: 0 auto 0; }
-
-  /* SECTIONS */
-  section { padding: 56px 0; border-top: 1px solid var(--line); }
-  section.no-border { border-top: none; }
-  h2 { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 28px; line-height: 1.3; margin-bottom: 22px; max-width: 520px; color: #1A1816; }
-  p { margin-bottom: 16px; max-width: 540px; color: #1A1816; }
-  p:last-child { margin-bottom: 0; }
-  .lead { font-family: 'EB Garamond', serif; font-size: 21px; line-height: 1.5; max-width: 540px; }
-  .aside { font-family: 'EB Garamond', serif; font-style: italic; color: var(--warm-gray); }
-  .closer { font-family: 'EB Garamond', serif; font-style: italic; font-size: 17px; color: var(--warm-gray); margin-top: 22px; }
-
-  /* CASES with circus icons */
-  .case-list { margin: 28px 0 0; }
-  .case {
-    display: flex; gap: 13px; align-items: flex-start;
-    padding: 20px 0; border-top: 1px solid var(--line);
-  }
-  .case:first-child { border-top: none; }
-  .case-icon { flex: 0 0 auto; width: 30px; height: 30px; margin-top: 3px; }
-  .case-icon svg { width: 30px; height: 30px; display: block; }
-  .case-body { flex: 1; min-width: 0; }
-  .case-role { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--crimson); margin-bottom: 5px; }
-  .case-text { font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.45; color: #1A1816; }
-  .case-text .it { font-style: italic; color: var(--warm-gray); }
-
-  @media (min-width: 600px) {
-    .case { gap: 18px; padding: 22px 0; }
-    .case-icon { width: 40px; height: 40px; margin-top: 2px; }
-    .case-icon svg { width: 40px; height: 40px; }
-    .case-text { font-size: 19px; }
-  }
-
-  /* SKEPTIC */
-  .skeptic { background: var(--cream-deep); margin: 0 -28px; padding: 56px 28px; }
-  .skeptic .wrap-inner { max-width: 540px; margin: 0 auto; }
-
-  /* DASH JOKE strip */
-  .dash-note {
-    border-top: 1px solid var(--line);
-    padding: 30px 0;
-    text-align: center;
-  }
-  .dash-note p {
-    font-family: 'EB Garamond', serif; font-style: italic;
-    font-size: 16px; color: var(--warm-gray); max-width: 500px; margin: 0 auto;
-  }
-
-  /* DEMO MOCKUP */
-  .demo-section { padding: 48px 0 56px; border-top: 1px solid var(--line); }
-  .demo-intro { text-align: center; margin-bottom: 8px; }
-  .demo-tag {
-    display: inline-block;
-    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--crimson);
-    border: 1px solid var(--crimson); border-radius: 100px; padding: 4px 13px; margin-bottom: 18px;
-  }
-  .demo-frame {
-    max-width: 380px; margin: 28px auto 0;
-    background: var(--cream-deep);
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    padding: 18px 16px 22px;
-    box-shadow: 0 18px 40px -20px rgba(26,24,22,0.18);
-  }
-  .demo-frame-header {
-    display: flex; align-items: center; gap: 10px;
-    padding: 0 4px 14px; margin-bottom: 14px; border-bottom: 1px solid var(--line);
-  }
-  .demo-frame-header svg { width: 26px; height: 26px; flex: 0 0 auto; }
-  .demo-frame-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); }
-  .demo-frame-sub { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--warm-gray); }
-
-  .demo-msg-row { display: flex; margin-bottom: 10px; }
-  .demo-msg-row.out { justify-content: flex-end; }
-  .demo-bubble {
-    max-width: 82%;
-    padding: 9px 13px;
-    border-radius: 14px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    line-height: 1.42;
-  }
-  .demo-msg-row.in .demo-bubble {
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-bottom-left-radius: 4px;
-    color: var(--ink);
-  }
-  .demo-msg-row.out .demo-bubble {
-    background: var(--crimson);
-    border-bottom-right-radius: 4px;
-    color: var(--cream);
-  }
-  .demo-time {
-    display: block; font-size: 10px; margin-top: 3px; opacity: 0.6; text-align: right;
-  }
-  .demo-msg-row.in .demo-time { color: var(--warm-gray); }
-  .demo-msg-row.out .demo-time { color: var(--cream); }
-  .demo-system-note {
-    text-align: center; font-family: 'Inter', sans-serif; font-size: 11px;
-    color: var(--warm-gray); margin: 14px 0; letter-spacing: 0.02em;
-  }
-  .demo-caption {
-    text-align: center; margin-top: 24px;
-  }
-  .demo-caption p {
-    font-family: 'EB Garamond', serif; font-style: italic; font-size: 16px;
-    color: var(--warm-gray); max-width: 480px; margin: 0 auto;
-  }
-
-  @media (min-width: 600px) {
-    .demo-section { padding: 56px 0 64px; }
-    .demo-frame { padding: 20px 18px 26px; }
-  }
-
-  .pricing-grid {
-    display: flex;
-    gap: 20px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-  }
-  .plan {
-    flex: 1 1 240px;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 32px 28px;
-    background: var(--cream);
-  }
-  .plan.premium {
-    border: 1.5px solid var(--crimson);
-    background: var(--cream-deep);
-    position: relative;
-  }
-  .plan-badge {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--crimson);
-    color: var(--cream);
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: 100px;
-    white-space: nowrap;
-  }
-  .plan-name {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--warm-gray);
-    margin-bottom: 14px;
-  }
-  .plan.premium .plan-name { color: var(--crimson); }
-  .plan-price {
-    font-family: 'EB Garamond', serif;
-    font-size: 38px;
-    color: #1A1816;
-    margin-bottom: 4px;
-    line-height: 1;
-  }
-  .plan-price .lpt, .plan-price .len {
-    font-family: 'EB Garamond', serif;
-    font-size: 38px;
-    color: #1A1816;
-    font-weight: inherit;
-  }
-  .plan-price .price-suffix {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: var(--warm-gray);
-    font-weight: 400;
-  }
-  .plan-desc {
-    font-family: 'EB Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--warm-gray);
-    margin: 14px 0 20px;
-    max-width: none;
-  }
-  .plan-features {
-    list-style: none;
-  }
-  .plan-features li {
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 10px;
-    font-size: 15px;
-    color: #1A1816;
-  }
-  .plan-features li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--crimson);
-  }
-  .pricing-note {
-    font-size: 13px;
-    color: var(--warm-gray);
-    margin-top: 28px;
-    max-width: 540px;
-  }
-
-  /* FORM */
-  .form-section { text-align: center; padding-bottom: 80px; }
-  .form-section h2 { margin: 0 auto 14px; }
-  .form-section .lead { margin: 0 auto 32px; color: #1A1816; }
-  .wa-button {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
-    padding: 16px 30px; border-radius: 100px; border: none;
-    background: var(--crimson); color: var(--cream);
-    cursor: pointer; text-decoration: none;
-    transition: transform 0.15s ease, background 0.15s ease;
-  }
-  .wa-button:hover { background: #8c1c18; }
-  .wa-button:active { transform: scale(0.97); }
-  .wa-button svg { width: 20px; height: 20px; }
-  .form-note { font-size: 13px; color: var(--warm-gray); margin: 20px auto 0; max-width: 420px; }
-
-  /* FOOTER */
-  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; text-align: center; }
-  footer p { margin: 0 auto; font-size: 13px; color: var(--warm-gray); font-family: 'EB Garamond', serif; font-style: italic; }
-  footer a { color: var(--crimson); text-decoration: none; border-bottom: 1px solid var(--line); }
-  footer a:hover { border-bottom-color: var(--crimson); }
-
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--crimson); outline-offset: 3px; }
-
-  @media (max-width: 540px) {
-    .hero { padding: 56px 0 48px; }
-    .hero h1 { font-size: 34px; }
-    .hero .sub { font-size: 16px; }
-    h2 { font-size: 23px; }
-    .lead { font-size: 19px; }
-    .skeptic { margin: 0 -28px; padding: 48px 24px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortex | Orchestrate Your Life</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1d1d1f;
+            --secondary: #86868b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 90%;
+            margin: 120px 0;
+        }
+        h1 {
+            font-size: 3rem;
+            letter-spacing: -0.02em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 40px;
+        }
+        .cta {
+            display: inline-block;
+            background-color: #007aff;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .cta:hover {
+            background-color: #005ecb;
+            transform: scale(1.02);
+        }
+        footer {
+            margin-top: 100px;
+            font-size: 0.9rem;
+            color: #d2d2d7;
+        }
+    </style>
 </head>
 <body>
 
-<!-- ============ LOGO DEFINITION (electronic brain) ============ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="cortex-mark" viewBox="0 0 48 48">
-      <!-- organic left hemisphere -->
-      <path d="M24 8
-               C17 8 12 12 12 18
-               C9 19 8 22 9 25
-               C8 28 10 31 13 32
-               C13 36 17 39 21 39
-               C22 39 23 38.5 24 37.5"
-            fill="none" stroke="#1A1816" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- circuit right hemisphere: straight traces + nodes -->
-      <path d="M24 8 L31 8 L31 13 M31 13 L37 13 M37 13 L37 20
-               M24 19 L34 19 M34 19 L34 25 M34 25 L39 25
-               M24 30 L32 30 L32 36 M32 36 L37 36
-               M24 8 L24 37.5"
-            fill="none" stroke="#A8231E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="37" cy="13" r="1.7" fill="#A8231E"/>
-      <circle cx="37" cy="20" r="1.7" fill="#A8231E"/>
-      <circle cx="39" cy="25" r="1.7" fill="#A8231E"/>
-      <circle cx="37" cy="36" r="1.7" fill="#A8231E"/>
-      <circle cx="34" cy="19" r="1.4" fill="#1A1816"/>
-    </symbol>
-  </defs>
-</svg>
-
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <svg><use href="#cortex-mark"/></svg>
-      <span class="wordmark">Cortex</span>
-    </div>
-    <div class="lang-toggle">
-      <button id="btn-pt">PT</button>
-      <button id="btn-en" class="active">EN</button>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
-
-  <!-- HERO -->
-  <section class="hero no-border">
-    <svg class="hero-logo" aria-label="Cortex"><use href="#cortex-mark"/></svg>
-    <div class="eyebrow"><span class="lpt">UMA INTELIGÊNCIA NO WHATSAPP</span><span class="len">AN INTELLIGENCE ON WHATSAPP</span></div>
-    <h1><span class="lpt">A IA mais inteligente é a que você esquece que existe.</span><span class="len">The smartest AI is the one you forget is there.</span></h1>
-    <p class="sub"><span class="lpt">Todo mundo quer te vender um assistente de IA. Nós queremos te devolver uma tarde livre.</span><span class="len">Everyone wants to sell you an AI assistant. We want to give you back a free afternoon.</span></p>
-  </section>
-
-  <!-- PROBLEMA -->
-  <section>
-    <h2><span class="lpt">Você não precisa de mais um app.</span><span class="len">You don't need another app.</span></h2>
-    <p><span class="lpt">Você já tem sete. Um pra anotar, um pra lembrar, um pra organizar quem lembra — e nenhum te liga de volta quando você esquece de tomar remédio, ou quando a entrevista de emprego é em quarenta minutos e ainda não tem roupa passada.</span><span class="len">You already have seven. One to write things down, one to remind you, one to organize who's reminding you — and none of them call you back when you forget to take your medicine, or when the job interview is in forty minutes and nothing's ironed yet.</span></p>
-    <p><span class="lpt">A gente trocou &ldquo;produtividade&rdquo; por uma pergunta mais simples: o que você precisa que alguém — ou alguma coisa — cuide pra você não carregar isso na cabeça o dia inteiro?</span><span class="len">We traded &ldquo;productivity&rdquo; for a simpler question: what do you need someone — or something — to look after, so you don't have to carry it in your head all day?</span></p>
-  </section>
-
-  <!-- O QUE É -->
-  <section>
-    <h2><span class="lpt">Sim, tem inteligência artificial aqui dentro.</span><span class="len">Yes, there's artificial intelligence in here.</span></h2>
-    <p class="aside"><span class="lpt">Vamos ser adultos sobre isso.</span><span class="len">Let's be adults about it.</span></p>
-    <p><span class="lpt">Cortex roda em algoritmos probabilísticos — a mesma família de tecnologia que está em tudo, de corretor ortográfico a recomendação de série. A diferença não está no motor. Está no que a gente decidiu fazer com ele: ficar quieto, ficar no fundo, e deixar você ser a parte interessante da própria vida.</span><span class="len">Cortex runs on probabilistic algorithms — the same family of technology behind everything from spell-check to your show recommendations. The difference isn't in the engine. It's in what we decided to do with it: stay quiet, stay in the background, and let you remain the interesting part of your own life.</span></p>
-    <p><span class="lpt">Você fala com a gente pelo WhatsApp. Sem app novo pra abrir, sem onboarding de doze telas, sem notificação pedindo avaliação cinco estrelas.</span><span class="len">You talk to us on WhatsApp. No new app to open, no twelve-screen onboarding, no notification asking for a five-star review.</span></p>
-  </section>
-
-  <!-- CASOS DE USO com ícones de circo -->
-  <section>
-    <h2><span class="lpt">A vida já é um picadeiro. A gente segura uma parte.</span><span class="len">Life is already a circus. We hold up part of it.</span></h2>
-
-    <div class="case-list">
-
-      <!-- EQUILIBRISTA -->
-      <div class="case">
-        <div class="case-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#A8231E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="24" cy="9" r="3"/>
-            <path d="M24 12 L24 27"/>
-            <path d="M24 16 L15 13 M24 16 L33 13"/>
-            <path d="M24 27 L18 40 M24 27 L30 40"/>
-            <path d="M6 13 L42 13"/>
-            <circle cx="15" cy="13" r="1.3" fill="#A8231E"/>
-            <circle cx="33" cy="13" r="1.3" fill="#A8231E"/>
-            <path d="M10 44 L38 44" stroke="#1A1816" stroke-width="1.1"/>
-          </svg>
-        </div>
-        <div class="case-body">
-          <div class="case-role"><span class="lpt">O EQUILIBRISTA</span><span class="len">THE TIGHTROPE WALKER</span></div>
-          <div class="case-text"><span class="lpt">Você com mil tarefas na corda bamba ao mesmo tempo. O Cortex organiza a rotina de estudo, trabalho ou cuidado <span class="it">sem virar mais uma fonte de ansiedade na vara de equilíbrio.</span></span><span class="len">You, balancing a thousand tasks on a wire at once. Cortex organizes your study, work or care routine <span class="it">without becoming one more weight on the balancing pole.</span></span></div>
-        </div>
-      </div>
-
-      <!-- MÁGICO -->
-      <div class="case">
-        <div class="case-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#A8231E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 20 L30 14"/>
-            <path d="M12 26 L16 14 L20 24 Z" fill="none"/>
-            <path d="M30 9 L31 12 L34 13 L31 14 L30 17 L29 14 L26 13 L29 12 Z" fill="#A8231E" stroke="none"/>
-            <path d="M9 40 C9 33 15 30 22 30 C29 30 35 33 35 40" />
-            <path d="M20 24 C22 27 26 28 30 27" stroke-dasharray="1 3"/>
-          </svg>
-        </div>
-        <div class="case-body">
-          <div class="case-role"><span class="lpt">O MÁGICO</span><span class="len">THE MAGICIAN</span></div>
-          <div class="case-text"><span class="lpt">Funciona como mágica — e, como toda boa mágica, <span class="it">você não precisa saber como é feita.</span> O cuidador avisa a família que &ldquo;o remédio foi às 14h e está tudo bem&rdquo; sem digitar uma palavra, todo santo dia.</span><span class="len">It works like magic — and like all good magic, <span class="it">you don't need to know how it's done.</span> The caregiver lets the family know &ldquo;the medicine was at 2pm and all is well&rdquo; without typing a word, every single day.</span></div>
-        </div>
-      </div>
-
-      <!-- CRIADOR (caneta/malabarismo de ideias) -->
-      <div class="case">
-        <div class="case-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#A8231E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="13" cy="12" r="2.4"/>
-            <circle cx="24" cy="8" r="2.4"/>
-            <circle cx="35" cy="12" r="2.4"/>
-            <path d="M18 22 C18 18 30 18 30 22 L31 33 C31 38 17 38 17 33 Z"/>
-            <path d="M22 26 L26 26 M22 30 L26 30"/>
-            <path d="M13 14 C15 18 16 19 18 22 M35 14 C33 18 32 19 30 22 M24 10 L24 18" stroke-dasharray="1 3"/>
-          </svg>
-        </div>
-        <div class="case-body">
-          <div class="case-role"><span class="lpt">O MALABARISTA</span><span class="len">THE JUGGLER</span></div>
-          <div class="case-text"><span class="lpt">Criadores que escrevem e gerenciam ideias o tempo todo, com seis projetos no ar. O Cortex segura as bolas que você não quer deixar cair: a ideia da madrugada, o roteiro pela metade, <span class="it">o lampejo que sempre some antes de você anotar.</span></span><span class="len">Creators who write and manage ideas all the time, six projects in the air. Cortex catches the balls you can't afford to drop: the 3am idea, the half-finished script, <span class="it">the spark that always vanishes before you write it down.</span></span></div>
-        </div>
-      </div>
-
-      <!-- PALHAÇO -->
-      <div class="case">
-        <div class="case-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#A8231E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="24" cy="24" r="13"/>
-            <circle cx="24" cy="25" r="2.2" fill="#A8231E" stroke="none"/>
-            <path d="M17 18.5 L20.5 18.5 M27.5 18.5 L31 18.5"/>
-            <path d="M18 31 C21 28 27 28 30 31"/>
-            <path d="M11 16 L7 12 M37 16 L41 12" stroke-dasharray="1 3"/>
-          </svg>
-        </div>
-        <div class="case-body">
-          <div class="case-role"><span class="lpt">O PALHAÇO</span><span class="len">THE CLOWN</span></div>
-          <div class="case-text"><span class="lpt">Você, quando a IA dos outros não funciona e te deixa no vácuo. A gente conhece esse número de circo bem demais — <span class="it">por isso o Cortex prefere fazer pouco e fazer certo a prometer o mundo e tropeçar no próprio sapato.</span></span><span class="len">You, when everyone else's AI fails and leaves you hanging. We know that circus act all too well — <span class="it">which is why Cortex would rather do little and do it right than promise the world and trip over its own big shoes.</span></span></div>
-        </div>
-      </div>
-
+    <div class="container">
+        <h1>Stop managing agents. Start orchestrating your life.</h1>
+        <p>Cortex is the invisible OS for your complex decisions. Built for those who value human judgment above all else.</p>
+        
+        <a href="https://wa.me/5527999301150?text=I%20want%20to%20start%20orchestrating%20my%20life" class="cta">Get early access on WhatsApp</a>
     </div>
 
-    <p class="closer"><span class="lpt">Números diferentes, mesmo picadeiro: a tecnologia faz o truque, mas o artista principal é você.</span><span class="len">Different acts, same ring: the technology does the trick, but you're the headline performer.</span></p>
-  </section>
-
-  <!-- DEMO MOCKUP -->
-  <section class="demo-section">
-    <div class="demo-intro">
-      <span class="demo-tag"><span class="lpt">COMO É NA PRÁTICA</span><span class="len">WHAT IT LOOKS LIKE</span></span>
-    </div>
-
-    <div class="demo-frame">
-      <div class="demo-frame-header">
-        <svg viewBox="0 0 48 48"><use href="#cortex-mark"/></svg>
-        <div>
-          <div class="demo-frame-title">Cortex</div>
-          <div class="demo-frame-sub"><span class="lpt">conversa de exemplo</span><span class="len">example conversation</span></div>
-        </div>
-      </div>
-
-      <div class="demo-msg-row in">
-        <div class="demo-bubble">
-          <span class="lpt">Bom dia, Aline! Hoje o remédio da pressão é depois do almoço — me conta quando almoçar que eu te lembro 🙂</span>
-          <span class="len">Morning, Aline! Today's blood pressure pill is after lunch — let me know when you eat and I'll remind you 🙂</span>
-          <span class="demo-time">8:02</span>
-        </div>
-      </div>
-
-      <div class="demo-msg-row out">
-        <div class="demo-bubble">
-          <span class="lpt">Acabei de almoçar!</span>
-          <span class="len">Just had lunch!</span>
-          <span class="demo-time">13:14</span>
-        </div>
-      </div>
-
-      <div class="demo-msg-row in">
-        <div class="demo-bubble">
-          <span class="lpt">Anotado. Remédio da pressão agora, então — um comprimido, com água. ✅</span>
-          <span class="len">Got it. Blood pressure pill now, then — one tablet, with water. ✅</span>
-          <span class="demo-time">13:14</span>
-        </div>
-      </div>
-
-      <div class="demo-system-note">
-        <span class="lpt">— 22 min depois —</span><span class="len">— 22 min later —</span>
-      </div>
-
-      <div class="demo-msg-row out">
-        <div class="demo-bubble">
-          <span class="lpt">Tomei ✅</span>
-          <span class="len">Took it ✅</span>
-          <span class="demo-time">13:36</span>
-        </div>
-      </div>
-
-      <div class="demo-system-note">
-        <span class="lpt">— Aline delega uma tarefa para a filha —</span><span class="len">— Aline delegates a task to her daughter —</span>
-      </div>
-
-      <div class="demo-msg-row out">
-        <div class="demo-bubble">
-          <span class="lpt">Cortex, pede pra Nat passear com o Tobby hoje à noite, eu vou sair</span>
-          <span class="len">Cortex, ask Nat to walk Tobby tonight, I'm going out</span>
-          <span class="demo-time">17:50</span>
-        </div>
-      </div>
-
-      <div class="demo-msg-row in">
-        <div class="demo-bubble">
-          <span class="lpt">Combinado — avisei a Nat. Te conto quando ela confirmar.</span>
-          <span class="len">Done — let Nat know. I'll tell you when she confirms.</span>
-          <span class="demo-time">17:50</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="demo-caption">
-      <p><span class="lpt">Conversa ilustrativa, inspirada em um uso real de cuidado familiar. Nomes fictícios — privacidade de quem inspirou o Cortex em primeiro lugar.</span><span class="len">Illustrative conversation, inspired by a real family caregiving use case. Fictional names — privacy for the person who inspired Cortex in the first place.</span></p>
-    </div>
-  </section>
-
-  <!-- PIADA DO TRAVESSÃO -->
-  <div class="wrap"></div>
-  <div class="dash-note">
-    <p><span class="lpt">P.S. — sabemos que o travessão virou sinal de texto feito por IA, e que metade da internet já implora pra aposentá-lo. A gente decidiu manter mesmo assim. Considere isto nossa pequena rebeldia tipográfica — e talvez a prova mais honesta de que tem gente de verdade escrevendo aqui.</span><span class="len">P.S. — we know the em dash has become the telltale sign of AI-written text, and that half the internet is begging to retire it. We decided to keep it anyway. Consider this our small typographic rebellion — and maybe the most honest proof that real people are writing here.</span></p>
-  </div>
-
-  <!-- CÉTICOS -->
-  <section class="no-border">
-    <div class="skeptic">
-      <div class="wrap-inner">
-        <h2><span class="lpt">Pra quem desconfia de IA</span><span class="len">For the AI-skeptical</span></h2>
-        <p class="lead"><span class="lpt">Se você lê &ldquo;IA&rdquo; e já sente o estômago embrulhar, ótimo. Continue desconfiando.</span><span class="len">If you read &ldquo;AI&rdquo; and your stomach already turns, good. Keep being skeptical.</span></p>
-        <p><span class="lpt">A gente também desconfia. Por isso o Cortex não tenta parecer seu amigo, não finge ter personalidade de sobra, e não guarda seus dados pra &ldquo;treinar melhor&rdquo;. Ele faz uma coisa, com humildade: ajuda você a lembrar e organizar o que já é seu — sem virar mais uma entidade pedindo atenção.</span><span class="len">We're skeptical too. That's why Cortex doesn't try to be your friend, doesn't pretend to have a big personality, and doesn't keep your data to &ldquo;train better.&rdquo; It does one thing, humbly: helps you remember and organize what's already yours — without becoming one more entity demanding your attention.</span></p>
-        <p><span class="lpt">Inteligência artificial devia ser chata como um bom assistente administrativo: presente quando precisa, invisível quando não precisa. A gente construiu pra isso.</span><span class="len">Artificial intelligence should be boring, like a good administrative assistant: present when needed, invisible when not. That's what we built it for.</span></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section>
-    <h2><span class="lpt">Quanto custa ter alguém cuidando disso</span><span class="len">What it costs to have someone looking after this</span></h2>
-    <p class="lead"><span class="lpt">Preço pensado pra caber no bolso de quem mais precisa — não no bolso de quem pode pagar qualquer coisa.</span><span class="len">Priced to fit the pocket of the people who need it most — not the pocket of whoever can afford anything.</span></p>
-
-    <div class="pricing-grid">
-      <div class="plan">
-        <div class="plan-name"><span class="lpt">BÁSICO</span><span class="len">BASIC</span></div>
-        <div class="plan-price"><span class="lpt">R$ 19,90<span class="price-suffix">/mês</span></span><span class="len">US$ 11,99<span class="price-suffix">/month</span></span></div>
-        <p class="plan-desc"><span class="lpt">Pra cuidar da sua própria cabeça.</span><span class="len">For looking after your own head.</span></p>
-        <ul class="plan-features">
-          <li><span class="lpt">1 perfil — você</span><span class="len">1 profile — you</span></li>
-          <li><span class="lpt">Lembretes e organização no WhatsApp</span><span class="len">Reminders and organization on WhatsApp</span></li>
-          <li><span class="lpt">Conversas ilimitadas dentro do uso pessoal</span><span class="len">Unlimited conversation within personal use</span></li>
-        </ul>
-      </div>
-
-      <div class="plan premium">
-        <div class="plan-badge"><span class="lpt">MAIS ESCOLHIDO</span><span class="len">MOST CHOSEN</span></div>
-        <div class="plan-name"><span class="lpt">PREMIUM</span><span class="len">PREMIUM</span></div>
-        <div class="plan-price"><span class="lpt">R$ 39,90<span class="price-suffix">/mês</span></span><span class="len">US$ 22,99<span class="price-suffix">/month</span></span></div>
-        <p class="plan-desc"><span class="lpt">Pra cuidar da cabeça de quem você também olha por.</span><span class="len">For looking after the heads of people you watch over too.</span></p>
-        <ul class="plan-features">
-          <li><span class="lpt">Perfis ilimitados — você e quem você coordena</span><span class="len">Unlimited profiles — you and whoever you coordinate for</span></li>
-          <li><span class="lpt">Atualizações automáticas pra família ou time</span><span class="len">Automatic updates for family or team</span></li>
-          <li><span class="lpt">Retrospectiva semanal da rotina</span><span class="len">Weekly routine retrospective</span></li>
-          <li><span class="lpt">Prioridade de resposta</span><span class="len">Priority response</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="pricing-note"><span class="lpt">Parte de cada assinatura vira doação pra uma ONG parceira. Não é marketing — é só a forma que a gente encontrou de fazer o Cortex valer um pouco mais do que o próprio Cortex.</span><span class="len">Part of every subscription becomes a donation to a partner NGO. It's not marketing — it's just the way we found to make Cortex worth a little more than Cortex itself.</span></p>
-  </section>
-
-  <!-- FORM -->
-  <section class="form-section">
-    <h2><span class="lpt">Quer testar, investir, virar parceiro, ou só entender melhor?</span><span class="len">Want to try it, invest, partner up, or just understand it better?</span></h2>
-    <p class="lead"><span class="lpt">Sem formulário de dez campos. Só chama a gente no WhatsApp.</span><span class="len">No ten-field form. Just message us on WhatsApp.</span></p>
-    <a class="wa-button" id="wa-link" href="https://wa.me/5527999301150" target="_blank" rel="noopener"
-       data-pt-href="https://wa.me/5527999301150?text=Oi!%20Cheguei%20pela%20landing%20do%20Cortex%20e%20quero%20saber%20mais."
-       data-en-href="https://wa.me/5527999301150?text=Hi!%20I%20came%20from%20the%20Cortex%20landing%20page%20and%20want%20to%20know%20more.">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A8 8 0 0 0 4.9 16.1L4 20l4-1a8 8 0 0 0 3.8 1 8 8 0 0 0 5.8-13.7zm-5.7 12.3a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3a6.7 6.7 0 1 1 5.6 3zm3.7-5c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.5.1l-.6.7c-.1.2-.2.2-.5.1a5.4 5.4 0 0 1-1.6-1 6 6 0 0 1-1.1-1.4c-.1-.2 0-.3.1-.4l.3-.4.2-.3v-.4l-.6-1.4c-.2-.4-.3-.3-.5-.3h-.4a.8.8 0 0 0-.6.3 2.5 2.5 0 0 0-.7 1.8 4.3 4.3 0 0 0 .9 2.2 9.7 9.7 0 0 0 3.7 3.3c1.4.5 1.4.4 1.7.3a2.1 2.1 0 0 0 1.4-1c.2-.4.2-.8.1-.9z"/></svg>
-      <span class="i18n"><span class="lpt">Conversar no WhatsApp</span><span class="len">Chat on WhatsApp</span></span>
-    </a>
-    <p class="form-note"><span class="lpt">Seria meio hipócrita pedir pra você preencher um formulário de dez campos num produto que existe pra te poupar esse tipo de trabalho.</span><span class="len">It would be a bit hypocritical to ask you to fill out a ten-field form for a product that exists to save you from exactly that kind of work.</span></p>
-  </section>
-
-  <footer>
-    <p><span class="lpt">Cortex é feito pela <a href="labs/?lang=pt">Lume Labs</a>. A gente também desconfia de robô que finge ser gente.</span><span class="len">Cortex is made by <a href="labs/?lang=en">Lume Labs</a>. We're also suspicious of robots that pretend to be people.</span></p>
-  </footer>
-
-</div>
-
-<script>
-  (function () {
-    var htmlEl = document.documentElement;
-    var btnPt = document.getElementById('btn-pt');
-    var btnEn = document.getElementById('btn-en');
-    var wa = document.getElementById('wa-link');
-
-    function setLang(lang) {
-      // lang: 'pt' ou 'en'
-      htmlEl.setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
-      if (wa) {
-        var href = wa.getAttribute('data-' + lang + '-href');
-        if (href) wa.setAttribute('href', href);
-      }
-      if (btnPt) btnPt.className = (lang === 'pt') ? 'active' : '';
-      if (btnEn) btnEn.className = (lang === 'en') ? 'active' : '';
-    }
-
-    if (btnPt) btnPt.addEventListener('click', function () { setLang('pt'); });
-    if (btnEn) btnEn.addEventListener('click', function () { setLang('en'); });
-
-    // Lê o idioma vindo da URL (?lang=pt ou ?lang=en), ex: link da Lume Labs.
-    // Sem o parâmetro, ou com valor inesperado, cai no padrão em inglês.
-    var params = new URLSearchParams(window.location.search);
-    var requested = params.get('lang');
-    setLang(requested === 'pt' ? 'pt' : 'en');
-  })();
-</script>
+    <footer>
+        © 2026 Cortex Intelligence
+    </footer>
 
 </body>
 </html>
+
